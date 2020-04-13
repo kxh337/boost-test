@@ -3,8 +3,8 @@ from alpine:3.7
 # Update apk and add certificates to wget
 RUN   apk update \
     && apk upgrade \
-    &&   apk add --no-cache ca-certificates wget openssl build-base boost boost-dev cmake\
-    &&   update-ca-certificates
+    && apk add --no-cache ca-certificates wget openssl build-base boost boost-dev cmake\
+    && update-ca-certificates
 
 # Download Turtle libraries
 RUN wget -P / https://downloads.sourceforge.net/project/turtle/turtle/1.3.1/turtle-1.3.1.tar.gz
@@ -20,5 +20,9 @@ ENV TURTLE_LIB_PATH="/usr/lib/turtle"
 ENV PROJECT_DIR=""
 ENV EXE_NAME=""
 
+# Add bash script to run tests easier
+COPY ./run_boost_test.sh /app/run_boost_test.sh
+RUN chmod +x /app/run_boost_test.sh
+
 # Run tests 
-ENTRYPOINT ["cmake" "$PROJECT_DIR" && cmake --build PROJECT_DIR && EXE_NAME"]
+#ENTRYPOINT ["/app/run_boost_test.sh", "$PROJECT_DIR", "$EXE_NAME"]
