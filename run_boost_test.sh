@@ -2,8 +2,9 @@
 PROJ_DIR=$1
 EXE_NAME=$2
 
-# Configure
-cmake $PROJ_DIR
+cd $PROJ_DIR
 
 # Build
-cmake --build $PROJ_DIR
+cmake --build .
+
+./$EXE_NAME
