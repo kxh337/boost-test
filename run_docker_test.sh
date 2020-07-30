@@ -1,4 +1,5 @@
 #!/bin/bash
+# Script to run the docker container application for the boost test
 PROJ_DIR=$1
 EXE_NAME=$2
 
